@@ -4,41 +4,40 @@ using System.Data.SqlClient;
 
 namespace Toolbox_Year_1.Queries
 {
-    public class SelectAllPersons
+    public class InsertDB
     {
         private List<Person> Persons = new List<Person>();
-        private string Query = "SELECT [First Name], [Last Name], [Age], [Id] from Persons ORDER BY [First Name], [Last Name]";
+        private string Query = "insert into Persons ([First Name], [Last Name], [Age]) OUTPUT INSERTED.Id values (@firstName, @lastName, @age)";
 
-        public SelectAllPersons()
+        public InsertDB(Person person)
         {
-            QueryDB();
+            UpdateDB(person);
 
-            OutputPersons();
+            OutputResult();
         }
 
-        public List<Person> OutputPersons()
+        private string OutputResult()
         {
-            return Persons;
+            return "Worked";
         }
 
-        private void QueryDB()
+        private void UpdateDB(Person person)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=Test;Trusted_Connection=True;";
 
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(Query, connection);
 
+            command.Parameters.AddWithValue("@firstName", person.FirstName);
+            command.Parameters.AddWithValue("@lastName", person.LastName);
+            command.Parameters.AddWithValue("@age", person.Age);
+
             try
             {
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    Persons.Add(new Person(reader[0].ToString(), reader[1].ToString(), Convert.ToInt32(reader[2]), Convert.ToInt32(reader[3])));
-                }
+                int newID = (int)command.ExecuteScalar();
 
-                reader.Close();
                 connection.Close();
             }
             catch (Exception ex)

@@ -7,17 +7,17 @@ namespace Toolbox_Year_1.Queries
     public class SearchPersons
     {
         private List<Person> Persons = new List<Person>();
-        private string QueryFirstName = "SELECT [First Name], [Last Name], [Age] "
+        private string QueryFirstName = "SELECT [First Name], [Last Name], [Age], [Id] "
                                         + "FROM Persons "
                                         + "WHERE [First Name] like @searchValue "
                                         + "ORDER BY[First Name], [Last Name]";
 
-        private string QueryLastName = "SELECT [First Name], [Last Name], [Age] "
+        private string QueryLastName = "SELECT [First Name], [Last Name], [Age], [Id] "
                                         + "FROM Persons "
                                         + "WHERE [Last Name] like @searchValue "
                                         + "ORDER BY[First Name], [Last Name]";
 
-        private string QueryAge = "SELECT [First Name], [Last Name], [Age] "
+        private string QueryAge = "SELECT [First Name], [Last Name], [Age], [Id] "
                                         + "FROM Persons "
                                         + "WHERE [Age] like @searchValue "
                                         + "ORDER BY[First Name], [Last Name]";
@@ -61,12 +61,7 @@ namespace Toolbox_Year_1.Queries
 
                 while (reader.Read())
                 {
-                    Persons.Add(new Person()
-                    {
-                        FirstName = reader[0].ToString(),
-                        LastName = reader[1].ToString(),
-                        Age = Convert.ToInt32(reader[2])
-                    });
+                    Persons.Add(new Person(reader[0].ToString(), reader[1].ToString(), Convert.ToInt32(reader[2]), Convert.ToInt32(reader[3])));
                 }
 
                 reader.Close();

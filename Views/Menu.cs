@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Toolbox_Year_1.Queries;
 
 namespace Toolbox_Year_1.Views
@@ -17,7 +14,8 @@ namespace Toolbox_Year_1.Views
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1 : Select All Persons");
             Console.WriteLine("2 : Search For Persons");
-            Console.WriteLine("3 : Exit Application");
+            Console.WriteLine("3 : Create New Person");
+            Console.WriteLine("4 : Exit Application");
             Console.WriteLine("|-------------------------|");
 
             GetInput();
@@ -49,6 +47,15 @@ namespace Toolbox_Year_1.Views
 
                 case "3":
                     Console.WriteLine();
+
+                    InsertDB();
+
+                    Console.WriteLine();
+                    MainMenu();
+                    break;
+
+                case "4":
+                    Console.WriteLine();
                     Console.WriteLine("Goodbye!");
                     break;
 
@@ -63,9 +70,37 @@ namespace Toolbox_Year_1.Views
             }
         }
 
+        private void InsertDB()
+        {
+            string firstName;
+            string lastName;
+            int age;
+
+            Console.WriteLine();
+
+            Console.WriteLine("Enter values to insert.");
+
+            Console.Write("First name: ");
+
+            firstName = Console.ReadLine().ToString();
+
+            Console.Write("Last name: ");
+
+            lastName = Console.ReadLine().ToString();
+
+            Console.Write("Age: ");
+
+            age = Convert.ToInt32(Console.ReadLine());
+
+            var dump = new InsertDB(new Person(firstName, lastName, age));
+
+            Console.WriteLine("Inserted!");
+
+            Console.WriteLine();
+        }
+
         private void SearchMenu()
         {
-            var person = new Person();
             Console.WriteLine("What would you like to search by?");
             Console.WriteLine("1: First Name");
             Console.WriteLine("2: Last Name");
