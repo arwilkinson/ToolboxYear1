@@ -92,7 +92,7 @@ namespace Toolbox_Year_1.Views
 
             age = Convert.ToInt32(Console.ReadLine());
 
-            DisplayPersons(new QueryDB().InsertDB(new Person(firstName, lastName, age), new QueryStrings().Insert));
+            DisplayPersons(new QueryDB().Insert(new Person(firstName, lastName, age), new QueryStrings().Insert));
 
             Console.WriteLine("Inserted!");
 

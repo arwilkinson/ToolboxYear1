@@ -87,7 +87,7 @@ namespace Toolbox_Year_1.Queries
 
             return Persons;
         }
-        public List<Person> InsertDB(Person person, string query)
+        public List<Person> Insert(Person person, string query)
         {
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
