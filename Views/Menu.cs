@@ -30,7 +30,7 @@ namespace Toolbox_Year_1.Views
                 case "1":
                     Console.WriteLine();
 
-                    DisplayPersons(new SelectAllPersons().OutputPersons());
+                    DisplayPersons(new QueryDB().SelectAll(new QueryStrings().SelectAllPersons));
 
                     Console.WriteLine();
                     MainMenu();
@@ -92,7 +92,7 @@ namespace Toolbox_Year_1.Views
 
             age = Convert.ToInt32(Console.ReadLine());
 
-            var dump = new InsertDB(new Person(firstName, lastName, age));
+            DisplayPersons(new QueryDB().InsertDB(new Person(firstName, lastName, age), new QueryStrings().Insert));
 
             Console.WriteLine("Inserted!");
 
@@ -122,7 +122,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new SearchPersons("1", UserInput).OutputPersons());
+                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryFirstName, UserInput));
 
                     break;
 
@@ -133,7 +133,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new SearchPersons("2", UserInput).OutputPersons());
+                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryLastName, UserInput));
 
                     break;
 
@@ -144,7 +144,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new SearchPersons("3", UserInput).OutputPersons());
+                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryAge, UserInput));
 
                     break;
 
