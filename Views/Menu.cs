@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Toolbox_Year_1.Queries;
+using static Toolbox_Year_1.Queries.QueryStrings;
+using static Toolbox_Year_1.Queries.QueryDB;
+//using c = System.Console; <-- Alias name space
 
 namespace Toolbox_Year_1.Views
 {
@@ -15,7 +18,8 @@ namespace Toolbox_Year_1.Views
             Console.WriteLine("1 : Select All Persons");
             Console.WriteLine("2 : Search For Persons");
             Console.WriteLine("3 : Create New Person");
-            Console.WriteLine("4 : Exit Application");
+            Console.WriteLine("4 : Update Person");
+            Console.WriteLine("5 : Exit Application");
             Console.WriteLine("|-------------------------|");
 
             GetInput();
@@ -30,7 +34,7 @@ namespace Toolbox_Year_1.Views
                 case "1":
                     Console.WriteLine();
 
-                    DisplayPersons(new QueryDB().SelectAll(new QueryStrings().SelectAllPersons));
+                    DisplayPersons(SelectAll(SelectAllPersonsSql));
 
                     Console.WriteLine();
                     MainMenu();
@@ -56,6 +60,13 @@ namespace Toolbox_Year_1.Views
 
                 case "4":
                     Console.WriteLine();
+
+                    UpdateDB();
+
+                    break;
+
+                case "5":
+                    Console.WriteLine();
                     Console.WriteLine("Goodbye!");
                     break;
 
@@ -68,6 +79,45 @@ namespace Toolbox_Year_1.Views
                     MainMenu();
                     break;
             }
+        }
+
+        private void UpdateDB()
+        {
+            Console.WriteLine("Enter Person ID: ");
+
+            int id = ConvertToInt(Console.ReadLine().ToString());
+
+            Console.Write("First name: ");
+
+            string firstName = Console.ReadLine().ToString();
+
+            Console.Write("Last name: ");
+
+            string lastName = Console.ReadLine().ToString();
+
+            Console.Write("Age: ");
+
+            int age = ConvertToInt(Console.ReadLine().ToString());
+
+            if (age != -1 && id != -1)
+            {
+                QueryDB.Update(new Person(firstName, lastName, age, id), UpdateSql);
+
+                DisplayPersons(SearchPersons(QueryIdSql, id));
+            }
+            else
+            {
+                Console.WriteLine("Numeric values are not valid. Enter numbers ONLY.");
+            }
+        }
+
+        private int ConvertToInt(string userInput)
+        {
+            int id = -1;
+
+            Int32.TryParse(userInput, out id);
+
+            return id;
         }
 
         private void InsertDB()
@@ -92,7 +142,7 @@ namespace Toolbox_Year_1.Views
 
             age = Convert.ToInt32(Console.ReadLine());
 
-            DisplayPersons(new QueryDB().Insert(new Person(firstName, lastName, age), new QueryStrings().Insert));
+            DisplayPersons(Insert(new Person(firstName, lastName, age), InsertSql));
 
             Console.WriteLine("Inserted!");
 
@@ -122,7 +172,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryFirstName, UserInput));
+                    DisplayPersons(SearchPersons(QueryFirstNameSql, UserInput));
 
                     break;
 
@@ -133,7 +183,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryLastName, UserInput));
+                    DisplayPersons(SearchPersons(QueryLastNameSql, UserInput));
 
                     break;
 
@@ -144,7 +194,7 @@ namespace Toolbox_Year_1.Views
 
                     GetInput();
 
-                    DisplayPersons(new QueryDB().SearchPersons(new QueryStrings().QueryAge, UserInput));
+                    DisplayPersons(SearchPersons(QueryAgeSql, UserInput));
 
                     break;
 
