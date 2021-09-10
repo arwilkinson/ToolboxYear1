@@ -136,5 +136,27 @@ namespace Toolbox_Year_1.Queries
 
             return Persons;
         }
+        public static List<Person> Delete(int id, string query)
+        {
+            using SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                connection.Open();
+
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return Persons;
+        }
     }
 }

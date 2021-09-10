@@ -19,7 +19,8 @@ namespace Toolbox_Year_1.Views
             Console.WriteLine("2 : Search For Persons");
             Console.WriteLine("3 : Create New Person");
             Console.WriteLine("4 : Update Person");
-            Console.WriteLine("5 : Exit Application");
+            Console.WriteLine("5 : Delete Person");
+            Console.WriteLine("6 : Exit Application");
             Console.WriteLine("|-------------------------|");
 
             ProcessMenuSelection(Console.ReadLine()) ;
@@ -65,6 +66,11 @@ namespace Toolbox_Year_1.Views
 
                 case "5":
                     Console.WriteLine();
+                    DeletePerson();
+                    break;
+
+                case "6":
+                    Console.WriteLine();
                     Console.WriteLine("Goodbye!");
                     break;
 
@@ -76,6 +82,24 @@ namespace Toolbox_Year_1.Views
                     Console.WriteLine();
                     MainMenu();
                     break;
+            }
+        }
+
+        private void DeletePerson()
+        {
+            Console.WriteLine("Enter Person ID: ");
+
+            int id = ConvertToInt(Console.ReadLine().ToString());
+
+            if (id != -1)
+            {
+                QueryDB.Delete(id, DeleteSql);
+
+                DisplayPersons(SearchPersons(QueryIdSql, id));
+            }
+            else
+            {
+                Console.WriteLine("Numeric values are not valid. Enter numbers ONLY.");
             }
         }
 
