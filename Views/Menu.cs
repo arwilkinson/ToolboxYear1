@@ -22,14 +22,12 @@ namespace Toolbox_Year_1.Views
             Console.WriteLine("5 : Exit Application");
             Console.WriteLine("|-------------------------|");
 
-            GetInput();
-
-            ProcessMenuSelection();
+            ProcessMenuSelection(Console.ReadLine()) ;
         }
 
-        private void ProcessMenuSelection()
+        private void ProcessMenuSelection(string userInput)
         {
-            switch (UserInput)
+            switch (userInput)
             {
                 case "1":
                     Console.WriteLine();
@@ -156,23 +154,19 @@ namespace Toolbox_Year_1.Views
             Console.WriteLine("2: Last Name");
             Console.WriteLine("3: Age");
 
-            GetInput();
-
-            ProcessSearchMenu();
+            ProcessSearchMenu(Console.ReadLine());
         }
 
-        private void ProcessSearchMenu()
+        private void ProcessSearchMenu(string userInput)
         {
-            switch (UserInput)
+            switch (userInput)
             {
                 case "1":
                     Console.WriteLine();
 
                     Console.WriteLine("Enter First Name");
 
-                    GetInput();
-
-                    DisplayPersons(SearchPersons(QueryFirstNameSql, UserInput));
+                    DisplayPersons(SearchPersons(QueryFirstNameSql, Console.ReadLine()));
 
                     break;
 
@@ -181,9 +175,7 @@ namespace Toolbox_Year_1.Views
 
                     Console.WriteLine("Enter Last Name");
 
-                    GetInput();
-
-                    DisplayPersons(SearchPersons(QueryLastNameSql, UserInput));
+                    DisplayPersons(SearchPersons(QueryLastNameSql, Console.ReadLine()));
 
                     break;
 
@@ -192,9 +184,7 @@ namespace Toolbox_Year_1.Views
 
                     Console.WriteLine("Enter Age");
 
-                    GetInput();
-
-                    DisplayPersons(SearchPersons(QueryAgeSql, UserInput));
+                    DisplayPersons(SearchPersons(QueryAgeSql, Console.ReadLine()));
 
                     break;
 
@@ -216,12 +206,6 @@ namespace Toolbox_Year_1.Views
             {
                 Console.WriteLine(person.ToString());
             }
-        }
-
-        private void GetInput()
-        {
-            Console.Write("Selection: ");
-            UserInput = Console.ReadLine();
         }
     }
 }
