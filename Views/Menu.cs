@@ -61,12 +61,14 @@ namespace Toolbox_Year_1.Views
                     Console.WriteLine();
 
                     UpdateDB();
+                    MainMenu();
 
                     break;
 
                 case "5":
                     Console.WriteLine();
                     DeletePerson();
+                    MainMenu();
                     break;
 
                 case "6":

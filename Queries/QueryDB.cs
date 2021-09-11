@@ -6,12 +6,12 @@ namespace Toolbox_Year_1.Queries
 {
     public static class QueryDB
     {
-        private static List<Person> Persons = new List<Person>();
-        private static string connectionString = @"Server=localhost\SQLEXPRESS;Database=Test;Trusted_Connection=True;";
+        private static string connectionString = @"Server=hawksoft.database.windows.net;Database=AustinToolbox;User id = darylbehrens;Password=AustinDaryl2021!";
 
 
         public static List<Person> SelectAll(string query)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -37,6 +37,7 @@ namespace Toolbox_Year_1.Queries
         }
         public static List<Person> SearchPersons(string query, string searchValue)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@searchValue", searchValue);
@@ -63,6 +64,7 @@ namespace Toolbox_Year_1.Queries
         }
         public static List<Person> SearchPersons(string query, int searchValue)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@searchValue", searchValue);
@@ -89,6 +91,7 @@ namespace Toolbox_Year_1.Queries
         }
         public static List<Person> Insert(Person person, string query)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -113,6 +116,7 @@ namespace Toolbox_Year_1.Queries
         }
         public static List<Person> Update(Person person, string query)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -138,6 +142,7 @@ namespace Toolbox_Year_1.Queries
         }
         public static List<Person> Delete(int id, string query)
         {
+            List<Person> Persons = new List<Person>();
             using SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query, connection);
 

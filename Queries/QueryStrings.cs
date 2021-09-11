@@ -15,31 +15,31 @@ namespace Toolbox_Year_1.Queries
 
         public static readonly string QueryFirstNameSql = @"SELECT [First Name], [Last Name], [Age], [Id]
                                                             FROM Persons
-                                                            WHERE [First Name] like @searchValue,
+                                                            WHERE [First Name] like @searchValue
                                                                 AND IsActive not in (0)
                                                             ORDER BY[First Name], [Last Name]";
 
         public static readonly string QueryLastNameSql = @"SELECT [First Name], [Last Name], [Age], [Id]
                                                         FROM Persons
-                                                        WHERE [Last Name] like @searchValue,
+                                                        WHERE [Last Name] like @searchValue
                                                             AND IsActive not in (0)
                                                         ORDER BY[First Name], [Last Name]";
 
         public static readonly string QueryAgeSql = @"SELECT [First Name], [Last Name], [Age], [Id] 
                                                     FROM Persons 
-                                                    WHERE [Age] like @searchValue,
+                                                    WHERE [Age] like @searchValue
                                                         AND IsActive not in (0)
                                                     ORDER BY[First Name], [Last Name]";
 
         public static readonly string QueryIdSql = @"SELECT [First Name], [Last Name], [Age], [Id] 
                                                     FROM Persons 
-                                                    WHERE [Id] like @searchValue,
+                                                    WHERE [Id] like @searchValue
                                                          AND IsActive not in (0)
                                                     ORDER BY[First Name], [Last Name]";
 
-        public static readonly string InsertSql = @"insert into Persons ([First Name], [Last Name], [Age]) 
+        public static readonly string InsertSql = @"insert into Persons ([First Name], [Last Name], [Age], IsActive) 
                                                     OUTPUT INSERTED.Id 
-                                                    values (@firstName, @lastName, @age)";
+                                                    values (@firstName, @lastName, @age, 1)";
 
         public static readonly string UpdateSql = @"UPDATE Persons 
                                                 SET [First Name] = @firstName, 
