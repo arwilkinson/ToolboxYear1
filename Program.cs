@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using Toolbox_Year_1.Queries;
-using Toolbox_Year_1.Views;
+﻿using Toolbox_Year_1.Views;
 
 namespace Toolbox_Year_1
 {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Toolbox_Year_1.Queries;
-using static Toolbox_Year_1.Queries.QueryStrings;
-using static Toolbox_Year_1.Queries.QueryDB;
+using Toolbox_Year_1.Models.Queries;
+using static Toolbox_Year_1.Models.Queries.QueryStrings;
+using static Toolbox_Year_1.Models.Queries.QueryDB;
+using Toolbox_Year_1.Models;
 //using c = System.Console; <-- Alias name space
 
 namespace Toolbox_Year_1.Views
@@ -33,7 +34,7 @@ namespace Toolbox_Year_1.Views
                 case "1":
                     Console.WriteLine();
 
-                    DisplayPersons(SelectAll(SelectAllPersonsSql));
+                    DisplayPersons(SelectAll());
 
                     Console.WriteLine();
                     MainMenu();
@@ -95,9 +96,9 @@ namespace Toolbox_Year_1.Views
 
             if (id != -1)
             {
-                QueryDB.Delete(id, DeleteSql);
+                QueryDB.Delete(id);
 
-                DisplayPersons(SearchPersons(QueryIdSql, id));
+                DisplayPersons(SearchWhereId(id));
             }
             else
             {
@@ -125,9 +126,9 @@ namespace Toolbox_Year_1.Views
 
             if (age != -1 && id != -1)
             {
-                QueryDB.Update(new Person(firstName, lastName, age, id), UpdateSql);
+                QueryDB.Update(new Person(firstName, lastName, age), id);
 
-                DisplayPersons(SearchPersons(QueryIdSql, id));
+                DisplayPersons(SearchWhereId(id));
             }
             else
             {
@@ -166,7 +167,7 @@ namespace Toolbox_Year_1.Views
 
             age = Convert.ToInt32(Console.ReadLine());
 
-            DisplayPersons(Insert(new Person(firstName, lastName, age), InsertSql));
+            Insert(new Person(firstName, lastName, age));
 
             Console.WriteLine("Inserted!");
 
@@ -192,7 +193,7 @@ namespace Toolbox_Year_1.Views
 
                     Console.WriteLine("Enter First Name");
 
-                    DisplayPersons(SearchPersons(QueryFirstNameSql, Console.ReadLine()));
+                    DisplayPersons(SearchWhereFirstName(Console.ReadLine()));
 
                     break;
 
@@ -201,7 +202,7 @@ namespace Toolbox_Year_1.Views
 
                     Console.WriteLine("Enter Last Name");
 
-                    DisplayPersons(SearchPersons(QueryLastNameSql, Console.ReadLine()));
+                    DisplayPersons(SearchWhereLastName(Console.ReadLine()));
 
                     break;
 
@@ -210,7 +211,7 @@ namespace Toolbox_Year_1.Views
 
                     Console.WriteLine("Enter Age");
 
-                    DisplayPersons(SearchPersons(QueryAgeSql, Console.ReadLine()));
+                    DisplayPersons(SearchWhereAge(Console.ReadLine()));
 
                     break;
 

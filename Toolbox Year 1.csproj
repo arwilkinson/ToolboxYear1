@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <ProjectReference Include="..\Toolbox Year 1.Models\Toolbox Year 1.Models.csproj" />
   </ItemGroup>
 
 </Project>
